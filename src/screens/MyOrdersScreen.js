@@ -1,23 +1,42 @@
-import React from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native';
+import React, {Component} from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Dimensions,
+  ImageBackground,
+} from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
-const MyOrdersScreen = ({navigation}) => {
-  return (
-    <View style={styles.container}>
-      <Text>My Orders Screen</Text>
-      <Button
-        title="My Orders Screen"
-        onPress={() => navigation.navigate('Cart')}
-      />
-    </View>
-  );
-};
+export class MyOrdersScreen extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.title}>My Orders</Text>
+        </View>
+      </View>
+    );
+  }
+}
+export default MyOrdersScreen;
 
-const styles = StyleSheet.create({
+const width = Dimensions.get('screen').width;
+var styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
+  },
+  header: {
     alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: hp('2%'),
+  },
+  title: {
+    color: '#EC942A',
+    fontWeight: 'bold',
+    fontSize: 25,
   },
 });
-export default MyOrdersScreen;

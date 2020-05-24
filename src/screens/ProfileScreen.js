@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import InputTextField from '../components/profile/InputTextField';
 import {SocialIcon} from 'react-native-elements';
+import LinearGradient from 'react-native-linear-gradient';
 
 import {
   widthPercentageToDP as wp,
@@ -24,62 +25,19 @@ export class ProfileScreen extends Component {
         <View>
           {/* <View
             style={{
-              marginTop: hp('5%'),
               alignItems: 'center',
               justifyContent: 'center',
+              marginBottom: hp('2%'),
             }}>
-            <Image source={require('../asset/pizzalogomed.png')} />
-            <Text
-              style={[
-                styles.text,
-                {marginTop: 10, fontSize: 28, fontWeight: '500'},
-              ]}>
-              Origano FireWood Pizza
-            </Text>
+            <Image
+              source={require('../asset/origanologo.jpg')}
+              style={{height: hp('20%'), width: wp('70%')}}
+            />
           </View> */}
 
-          {/* <View
-            style={{
-              marginTop: hp('5%'),
-              flexDirection: 'row',
-              justifyContent: 'center',
-            }}>
-            <TouchableOpacity>
-              <View style={styles.socialButton}>
-                <Image
-                  source={require('../asset/facebook.png')}
-                  style={styles.socialLogo}
-                />
-                <Text style={styles.text}>Facebook</Text>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-              <View style={styles.socialButton}>
-                <Image
-                  source={require('../asset/google.png')}
-                  style={styles.socialLogo}
-                />
-                <Text style={styles.text}>Google</Text>
-              </View>
-            </TouchableOpacity>
-          </View> */}
-          {/* 
-          <Text
-            style={[
-              styles.text,
-              {
-                color: '#ABB4BD',
-                fontSize: 15,
-                textAlign: 'center',
-                marginVertical: 20,
-              },
-            ]}>
-            or
-          </Text> */}
           <InputTextField title={'Email'} />
           <InputTextField
-            style={{marginTop: 32, marginBottom: 8}}
+            style={{marginTop: hp('2%')}}
             title={'Password'}
             isSecure={true}
           />
@@ -87,24 +45,24 @@ export class ProfileScreen extends Component {
           <Text style={[styles.text, styles.link, {textAlign: 'right'}]}>
             Forgot Password?
           </Text>
-          <TouchableOpacity style={styles.submitContainer}>
-            <Text
-              style={[
-                styles.text,
-                {color: '#fff', fontWeight: '600', fontSize: 16},
-              ]}>
-              Login
-            </Text>
+          <TouchableOpacity>
+            <LinearGradient
+              start={{x: 0, y: 0}}
+              end={{x: 1, y: 0}}
+              colors={['#F47621', '#F89919']}
+              style={styles.button}>
+              <Text style={styles.textOrder}>LOGIN</Text>
+            </LinearGradient>
           </TouchableOpacity>
 
           <Text
             style={[
               styles.text,
               {
-                fontSize: 14,
+                fontSize: hp('2%'),
                 color: '#ABB4BD',
                 textAlign: 'center',
-                marginTop: 24,
+                marginTop: hp('3%'),
               },
             ]}>
             Don't have an account yet?
@@ -117,9 +75,9 @@ export class ProfileScreen extends Component {
               styles.text,
               {
                 color: '#ABB4BD',
-                fontSize: 15,
+                fontSize: hp('2.5%'),
                 textAlign: 'center',
-                marginVertical: 20,
+                marginVertical: hp('2%'),
               },
             ]}>
             or
@@ -138,49 +96,29 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingHorizontal: 30,
+    paddingHorizontal: wp('5%'),
     justifyContent: 'center',
   },
   text: {
     fontFamily: 'Avenier Next',
-    color: '#1D2029',
-  },
-  socialButton: {
-    flexDirection: 'row',
-    marginHorizontal: 12,
-    paddingVertical: 12,
-    paddingHorizontal: 30,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: 'rgba(171,180,189,0.65)',
-    borderRadius: 4,
-    backgroundColor: '#fff',
-    shadowColor: 'rgba(171,180,189,0.35)',
-    shadowOffset: {width: 0, height: 10},
-    shadowOpacity: 1,
-    shadowRadius: 20,
-    elevation: 5,
-  },
-  socialLogo: {
-    width: 16,
-    height: 16,
-    marginRight: 8,
+    color: '#EC942A',
   },
   link: {
-    color: '#FF1654',
-    fontSize: 14,
+    color: '#EC942A',
+    fontSize: hp('2%'),
     fontWeight: '500',
+    marginTop: hp('2%'),
   },
-  submitContainer: {
-    backgroundColor: '#FF1654',
-    fontSize: 16,
-    borderRadius: 4,
-    paddingVertical: 14,
-    marginTop: 32,
-    alignItems: 'center',
+  textOrder: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: hp('2.5%'),
+  },
+  button: {
     justifyContent: 'center',
-    shadowColor: 'rgba(255,22,84,0.24)',
-    shadowOffset: {width: 0, height: 9},
-    shadowOpacity: 1,
-    shadowRadius: 20,
+    alignItems: 'center',
+    paddingVertical: hp('1.5%'),
+    marginVertical: hp('2%'),
+    borderRadius: 100,
   },
 });

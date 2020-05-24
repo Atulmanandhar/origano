@@ -179,8 +179,8 @@ var styles = StyleSheet.create({
   },
   item: {
     flex: 1,
-    paddingVertical: 20,
-    paddingHorizontal: 10,
+    paddingVertical: hp('3%'),
+    paddingHorizontal: wp('3%'),
     flexDirection: 'row',
     borderRadius: 10,
   },
@@ -191,22 +191,22 @@ var styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
-    borderWidth: 5,
+    borderWidth: 3,
     borderColor: 'white',
     borderRadius: 10,
   },
   content: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: 10,
+    paddingHorizontal: wp('3%'),
   },
   name: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: hp('2.5%'),
   },
   rating: {
-    marginTop: 5,
+    marginTop: hp('1%'),
     flexDirection: 'row',
   },
   button: {
@@ -219,25 +219,16 @@ var styles = StyleSheet.create({
   },
   price_container: {
     flexDirection: 'row',
-    marginTop: 10,
+    marginTop: hp('1%'),
   },
   price: {
     backgroundColor: 'white',
-    paddingVertical: 5,
-    paddingHorizontal: 15,
+    paddingVertical: hp('1%'),
+    paddingHorizontal: wp('3%'),
     borderRadius: 50,
   },
   textPrice: {
     color: '#F89919',
     fontWeight: 'bold',
-  },
-  section: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 100,
-    backgroundColor: '#f2f2f2',
-    marginTop: 10,
   },
 });

@@ -232,11 +232,6 @@ var styles = StyleSheet.create({
     color: '#EC942A',
     marginVertical: hp('2%'),
   },
-  // flatList: {
-  //   flex: 1,
-  //   marginTop: 10,
-  //   paddingHorizontal: 10,
-  // },
   item: {
     flex: 1,
     // paddingVertical: 10,
