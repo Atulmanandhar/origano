@@ -4,7 +4,6 @@ import {
   Text,
   StyleSheet,
   Image,
-  Dimensions,
   FlatList,
   TouchableWithoutFeedback,
   SafeAreaView,
@@ -33,7 +32,11 @@ var data = [
     image: require('../asset/hampizza.jpg'),
   },
   {
-    name: 'Sides',
+    name: 'Burger',
+    image: require('../asset/burgercombo.jpg'),
+  },
+  {
+    name: 'Pastas',
     image: require('../asset/hutieu.jpg'),
   },
   {
@@ -87,20 +90,26 @@ export default class HomeScreen extends React.Component {
     );
   };
   handleClick(item) {
+    if (item.name == "Today's Special") {
+      this.props.navigation.navigate('Special');
+    }
     if (item.name == 'Pizza') {
       this.props.navigation.navigate('Pizza');
     }
     if (item.name == 'Burger') {
-      this.props.navigation.navigate('BurgerScreen');
+      this.props.navigation.navigate('Burger');
     }
-    if (item.name == 'Sides') {
-      this.props.navigation.navigate('SidesScreen');
+    if (item.name == 'Pastas') {
+      this.props.navigation.navigate('Pasta');
     }
     if (item.name == 'Salad') {
-      this.props.navigation.navigate('SaladScreen');
+      this.props.navigation.navigate('Salad');
     }
     if (item.name == 'Desserts') {
-      this.props.navigation.navigate('DessertScreen');
+      this.props.navigation.navigate('Dessert');
+    }
+    if (item.name == 'Beverages') {
+      this.props.navigation.navigate('Beverage');
     }
   }
   ItemSeparatorComponent = () => {

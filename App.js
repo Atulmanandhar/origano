@@ -15,6 +15,12 @@ import SearchScreen from './src/screens/SearchScreen';
 import PizzaScreen from './src/screens/PizzaScreen';
 import MyOrdersScreen from './src/screens/MyOrdersScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
+import SpecialScreen from './src/screens/SpecialScreen';
+import BurgerScreen from './src/screens/BurgerScreen';
+import PastaScreen from './src/screens/PastaScreen';
+import SaladScreen from './src/screens/SaladScreen';
+import DessertScreen from './src/screens/DessertScreen';
+import BeverageScreen from './src/screens/BeverageScreen';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -82,7 +88,13 @@ const App = () => {
         <Stack.Screen name="Home" component={HomeTabNavigator} />
         <Stack.Screen name="Detail" component={DetailScreen} />
         <Stack.Screen name="Search" component={SearchScreen} />
+        <Stack.Screen name="Special" component={SpecialScreen} />
         <Stack.Screen name="Pizza" component={PizzaScreen} />
+        <Stack.Screen name="Burger" component={BurgerScreen} />
+        <Stack.Screen name="Pasta" component={PastaScreen} />
+        <Stack.Screen name="Salad" component={SaladScreen} />
+        <Stack.Screen name="Dessert" component={DessertScreen} />
+        <Stack.Screen name="Beverage" component={BeverageScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

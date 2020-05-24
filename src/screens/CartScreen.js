@@ -39,20 +39,18 @@ export class CartScreen extends Component {
     });
   };
   componentDidMount() {
-    this.getdata();
     //Reload Trick
     const {navigation} = this.props;
     console.log(navigation);
     //Adding an event listner om focus
-    this.focusListener = navigation.addListener('didFocus', () => {
+    this.focusListener = navigation.addListener('focus', () => {
       console.log('cart component rendered');
       this.getdata();
     });
   }
   componentWillUnmount() {
     // Remove the event listener before removing the screen from the stack
-    // this.focusListener.remove();
-    clearTimeout(this.t);
+    this.focusListener.remove();
   }
   onChangeQuat(i, type) {
     const tempDataCart = this.state.dataCart;
