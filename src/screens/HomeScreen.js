@@ -20,18 +20,17 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-// import Carousel from './components/Carousel';
-// import {carouselData} from './carouselData/CarouselData';
-const width = Dimensions.get('screen').width;
+import Carousel from '../components/Carousel';
+import {carouselData} from '../carouselData/CarouselData';
 
 var data = [
   {
-    name: 'Pizza',
+    name: "Today's Special",
     image: require('../asset/hampizza.jpg'),
   },
   {
-    name: 'Burger',
-    image: require('../asset/burgercombo.jpg'),
+    name: 'Pizza',
+    image: require('../asset/hampizza.jpg'),
   },
   {
     name: 'Sides',
@@ -63,31 +62,33 @@ export default class HomeScreen extends React.Component {
 
   renderItem = ({item}) => {
     return (
-      <TouchableWithoutFeedback onPress={() => this.handleClick(item)}>
-        <LinearGradient
-          colors={['#ba000d', '#ff7961']}
-          start={{x: 0, y: 1}}
-          end={{x: 1, y: 0}}
-          style={styles.item}>
-          <View style={styles.image_container}>
-            <Image source={item.image} style={styles.image} />
-          </View>
-          <View style={styles.content}>
-            <Text style={styles.name}>{item.name}</Text>
-            <Icon
-              name="chevron-right"
-              size={20}
-              color="#fbfbfb"
-              style={{paddingTop: 8}}
-            />
-          </View>
-        </LinearGradient>
-      </TouchableWithoutFeedback>
+      <View style={{paddingHorizontal: 10}}>
+        <TouchableWithoutFeedback onPress={() => this.handleClick(item)}>
+          <LinearGradient
+            colors={['#F47621', '#F89919']}
+            start={{x: 0, y: 1}}
+            end={{x: 1, y: 0}}
+            style={styles.item}>
+            <View style={styles.image_container}>
+              <Image source={item.image} style={styles.image} />
+            </View>
+            <View style={styles.content}>
+              <Text style={styles.name}>{item.name}</Text>
+              <Icon
+                name="chevron-right"
+                size={20}
+                color="#fbfbfb"
+                style={{paddingTop: hp('0.5%')}}
+              />
+            </View>
+          </LinearGradient>
+        </TouchableWithoutFeedback>
+      </View>
     );
   };
   handleClick(item) {
     if (item.name == 'Pizza') {
-      this.props.navigation.navigate('PizzaScreen');
+      this.props.navigation.navigate('Pizza');
     }
     if (item.name == 'Burger') {
       this.props.navigation.navigate('BurgerScreen');
@@ -128,86 +129,60 @@ export default class HomeScreen extends React.Component {
     console.log(this.props);
     const listHeader = () => {
       return (
-        <View>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-evenly',
-              marginVertical: -10,
-            }}>
+        <SafeAreaView style={{flex: 1}}>
+          <Carousel data={carouselData} />
+          <View style={styles.orderBtnsView}>
             <View>
-              <LinearGradient
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 0}}
-                colors={['#df0f1d', '#ff7961']}
-                style={styles.buttonDelivery}>
-                <Text style={styles.textOrder}>Delivery </Text>
-                <MaterialCommunityIcons
-                  name="truck-fast"
-                  color="white"
-                  size={20}
-                />
-              </LinearGradient>
+              <TouchableOpacity>
+                <LinearGradient
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 0}}
+                  colors={['#F47621', '#F89919']}
+                  width={wp('35%')}
+                  height={hp('6%')}
+                  style={styles.buttonDelivery}>
+                  <Text style={styles.textOrder}>Delivery </Text>
+                  <MaterialCommunityIcons
+                    name="truck-fast"
+                    color="white"
+                    size={20}
+                  />
+                </LinearGradient>
+              </TouchableOpacity>
             </View>
             <View>
-              <LinearGradient
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 0}}
-                colors={['#df0f1d', '#ff7961']}
-                style={styles.buttonDelivery}>
-                <Text style={styles.textOrder}>Pickup </Text>
-                <FAIcon name="store" color="white" />
-              </LinearGradient>
+              <TouchableOpacity>
+                <LinearGradient
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 0}}
+                  colors={['#F47621', '#F89919']}
+                  width={wp('35%')}
+                  height={hp('6%')}
+                  style={styles.buttonDelivery}>
+                  <Text style={styles.textOrder}>Pickup </Text>
+                  <FAIcon name="store" color="white" />
+                </LinearGradient>
+              </TouchableOpacity>
             </View>
           </View>
           <View style={{alignItems: 'center'}}>
-            <Text
-              style={{
-                fontSize: 25,
-                fontWeight: 'bold',
-                color: '#df0f1d',
-                marginVertical: 10,
-              }}>
-              OUR BEST MENU
-            </Text>
+            <Text style={styles.bestMenuText}>OUR BEST MENU</Text>
           </View>
-        </View>
+        </SafeAreaView>
       );
     };
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
         <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('SearchScreen')}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingVertical: 12,
-              paddingHorizontal: 20,
-              borderRadius: 100,
-              borderWidth: 1,
-              borderColor: '#ddd',
-              justifyContent: 'center',
-              marginHorizontal: 10,
-              backgroundColor: '#f7f7f7',
-              marginTop: 10,
-              marginVertical: 10,
-            }}>
-            <Ionicons
-              name="ios-search"
-              size={22}
-              style={{marginTop: 6}}
-              color="#B6B6B6"
-            />
+          onPress={() => this.props.navigation.navigate('Search')}>
+          <View style={styles.searchBtn}>
+            <Ionicons name="ios-search" size={22} color="#B6B6B6" />
             <Text
-              style={{flex: 1, marginLeft: 10, fontSize: 16, color: '#B6B6B6'}}>
+              style={{flex: 1, color: '#B6B6B6', paddingHorizontal: wp('2%')}}>
               Search..
             </Text>
           </View>
         </TouchableOpacity>
-        {/* <Carousel data={carouselData} /> */}
 
         <View style={styles.container}>
           <View style={styles.flatList}>
@@ -231,26 +206,43 @@ var styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  // tabbar: {
-  //   flex: 1,
-  //   marginTop: width * 0.05,
-  //   paddingHorizontal: 30,
-  // },
-  // title: {
-  //   color: 'white',
-  //   marginTop: 25,
-  //   fontWeight: 'bold',
-  //   fontSize: 25,
-  // },
-  flatList: {
-    flex: 1,
-    marginTop: 10,
-    paddingHorizontal: 10,
+  searchBtn: {
+    flexDirection: 'row',
+    height: hp('6%'),
+    marginTop: hp('2%'),
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#ddd',
+    marginHorizontal: wp('2%'),
+    paddingHorizontal: wp('3%'),
+    borderRadius: 100,
+    backgroundColor: '#f7f7f7',
   },
+  orderBtnsView: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    height: hp('5%'),
+    marginVertical: hp('1%'),
+  },
+  bestMenuText: {
+    fontSize: hp('3.5%'),
+    fontWeight: 'bold',
+    color: '#EC942A',
+    marginVertical: hp('2%'),
+  },
+  // flatList: {
+  //   flex: 1,
+  //   marginTop: 10,
+  //   paddingHorizontal: 10,
+  // },
   item: {
     flex: 1,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
+    // paddingVertical: 10,
+    paddingVertical: hp('1.5%'),
+    // paddingHorizontal: 10,
+    paddingHorizontal: wp('3%'),
     flexDirection: 'row',
     borderRadius: 10,
   },
@@ -259,7 +251,7 @@ var styles = StyleSheet.create({
     height: 90,
   },
   image: {
-    width: '100%',
+    width: '80%',
     height: '100%',
     // borderWidth: 5,
     borderColor: 'white',
@@ -270,55 +262,30 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    paddingHorizontal: 10,
+    paddingHorizontal: wp('3%'),
   },
   name: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 24,
-    right: 20,
+    fontSize: hp('3%'),
+    // right: 20,
+    right: wp('4%'),
   },
-  rating: {
-    marginTop: 5,
-    flexDirection: 'row',
-  },
-  price_container: {
-    flexDirection: 'row',
-    marginTop: 10,
-  },
-  price: {
-    backgroundColor: 'white',
-    paddingVertical: 5,
-    paddingHorizontal: 15,
-    borderRadius: 50,
-  },
+
   textPrice: {
     color: '#cc0000',
     fontWeight: 'bold',
   },
-  section: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 100,
-    backgroundColor: '#f2f2f2',
-    marginTop: 10,
-  },
   buttonDelivery: {
-    backgroundColor: '#000',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 40,
-    marginVertical: 20,
-    padding: 20,
+    marginTop: hp('1%'),
     flexDirection: 'row',
-    paddingVertical: 10,
     borderRadius: 50,
   },
   textOrder: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: hp('2.5%'),
   },
 });

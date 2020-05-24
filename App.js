@@ -14,6 +14,8 @@ import CustomTabBar from './src/components/CustomTabBar';
 import HomeScreen from './src/screens/HomeScreen';
 import CartScreen from './src/screens/CartScreen';
 import DetailScreen from './src/screens/DetailScreen';
+import SearchScreen from './src/screens/SearchScreen';
+import PizzaScreen from './src/screens/PizzaScreen';
 import MyOrdersScreen from './src/screens/MyOrdersScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 
@@ -25,7 +27,7 @@ const HomeTabNavigator = () => {
     <Tab.Navigator
       initialRouteName="Home"
       activeColor="orange"
-      // inactiveColor="#3e2465"
+      // inactiveColor="#424242"
       barStyle={{backgroundColor: 'white'}}>
       <Tab.Screen
         name="Home"
@@ -82,6 +84,8 @@ const App = () => {
         headerMode="float">
         <Stack.Screen name="Home" component={HomeTabNavigator} />
         <Stack.Screen name="Detail" component={DetailScreen} />
+        <Stack.Screen name="Search" component={SearchScreen} />
+        <Stack.Screen name="Pizza" component={PizzaScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
