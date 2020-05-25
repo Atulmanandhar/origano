@@ -21,6 +21,7 @@ import PastaScreen from './src/screens/PastaScreen';
 import SaladScreen from './src/screens/SaladScreen';
 import DessertScreen from './src/screens/DessertScreen';
 import BeverageScreen from './src/screens/BeverageScreen';
+import SignupScreen from './src/screens/SignupScreen';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -87,6 +88,7 @@ const App = () => {
         headerMode="float">
         <Stack.Screen name="Home" component={HomeTabNavigator} />
         <Stack.Screen name="Detail" component={DetailScreen} />
+        <Stack.Screen name="Signup" component={SignupScreen} />
         <Stack.Screen name="Search" component={SearchScreen} />
         <Stack.Screen name="Special" component={SpecialScreen} />
         <Stack.Screen name="Pizza" component={PizzaScreen} />
