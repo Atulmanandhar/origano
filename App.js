@@ -14,16 +14,17 @@ import DetailScreen from './src/screens/DetailScreen';
 import SearchScreen from './src/screens/SearchScreen';
 import PizzaScreen from './src/screens/PizzaScreen';
 import MyOrdersScreen from './src/screens/MyOrdersScreen';
-import ProfileScreen from './src/screens/ProfileScreen';
+import ProfileScreen from './src/screens/Profile/ProfileScreen';
 import SpecialScreen from './src/screens/SpecialScreen';
 import BurgerScreen from './src/screens/BurgerScreen';
 import PastaScreen from './src/screens/PastaScreen';
 import SaladScreen from './src/screens/SaladScreen';
 import DessertScreen from './src/screens/DessertScreen';
 import BeverageScreen from './src/screens/BeverageScreen';
-import SignupScreen from './src/screens/SignupScreen';
+import SignupScreen from './src/screens/Profile/SignupScreen';
 
 const Stack = createStackNavigator();
+const ProfileStack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 const HomeTabNavigator = () => {
@@ -62,7 +63,7 @@ const HomeTabNavigator = () => {
       />
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={ProfileNavigator}
         options={{
           tabBarIcon: ({color}) => (
             <Ionicons name="ios-person" color={color} size={26} />
@@ -70,6 +71,22 @@ const HomeTabNavigator = () => {
         }}
       />
     </Tab.Navigator>
+  );
+};
+
+const ProfileNavigator = () => {
+  return (
+    <ProfileStack.Navigator
+      initialRouteName="Profile"
+      screenOptions={{
+        headerShown: false,
+        gestureEnabled: true,
+        gestureDirection: 'horizontal',
+        ...TransitionPresets.SlideFromRightIOS,
+      }}>
+      <ProfileStack.Screen name="Profile" component={ProfileScreen} />
+      <ProfileStack.Screen name="Signup" component={SignupScreen} />
+    </ProfileStack.Navigator>
   );
 };
 

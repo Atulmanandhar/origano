@@ -4,11 +4,11 @@ import {
   View,
   StyleSheet,
   Dimensions,
+  Image,
   TouchableOpacity,
-  ScrollView,
   SafeAreaView,
 } from 'react-native';
-import InputTextField from '../components/profile/InputTextField';
+import InputTextField from '../../components/profile/InputTextField';
 import {SocialIcon} from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -17,7 +17,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-export class SignupScreen extends Component {
+export class ProfileScreen extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -40,24 +40,23 @@ export class SignupScreen extends Component {
             title={'Password'}
             isSecure={true}
           />
-          <InputTextField
-            style={{marginTop: hp('2%')}}
-            title={'Confirm Password'}
-            isSecure={true}
-          />
+
+          <Text style={[styles.text, styles.link, {textAlign: 'right'}]}>
+            Forgot Password?
+          </Text>
           <TouchableOpacity>
             <LinearGradient
               start={{x: 0, y: 0}}
               end={{x: 1, y: 0}}
               colors={['#F47621', '#F89919']}
               style={styles.button}>
-              <Text style={styles.textOrder}>SIGN UP</Text>
+              <Text style={styles.textOrder}>LOGIN</Text>
             </LinearGradient>
           </TouchableOpacity>
           <View
             style={{
-              alignItems: 'center',
               flexDirection: 'row',
+              alignItems: 'center',
               justifyContent: 'center',
             }}>
             <Text
@@ -70,19 +69,37 @@ export class SignupScreen extends Component {
                   textAlign: 'center',
                 },
               ]}>
-              Already have an accound?
+              Don't have an account yet?
             </Text>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Profile')}>
-              <Text style={[styles.text, styles.link]}> Sign In</Text>
+              onPress={() => {
+                this.props.navigation.navigate('Signup');
+              }}>
+              <Text style={[styles.text, styles.link]}> Register Now</Text>
             </TouchableOpacity>
           </View>
+        </View>
+        <View>
+          <Text
+            style={[
+              styles.text,
+              {
+                color: '#ABB4BD',
+                fontSize: hp('2.5%'),
+                textAlign: 'center',
+                marginVertical: hp('2%'),
+              },
+            ]}>
+            or
+          </Text>
+          <SocialIcon title="Sign In With Facebook" button type="facebook" />
+          <SocialIcon title="Sign In With Google" button type="google" />
         </View>
       </SafeAreaView>
     );
   }
 }
-export default SignupScreen;
+export default ProfileScreen;
 
 const width = Dimensions.get('screen').width;
 var styles = StyleSheet.create({
