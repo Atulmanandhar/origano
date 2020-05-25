@@ -8,93 +8,37 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from 'react-native';
-import InputTextField from '../../components/profile/InputTextField';
-import {SocialIcon} from 'react-native-elements';
-import LinearGradient from 'react-native-linear-gradient';
-
+import * as firebase from 'firebase';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
 export class ProfileScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      displayName: '',
+    };
+  }
+  componentDidMount() {
+    const {email, displayName} = firebase.auth().currentUser;
+
+    this.setState({email, displayName});
+  }
+
+  signOutUser = () => {
+    firebase.auth().signOut();
+  };
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <View>
-          {/* <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: hp('2%'),
-            }}>
-            <Image
-              source={require('../asset/origanologo.jpg')}
-              style={{height: hp('20%'), width: wp('70%')}}
-            />
-          </View> */}
-
-          <InputTextField title={'Email'} />
-          <InputTextField
-            style={{marginTop: hp('2%')}}
-            title={'Password'}
-            isSecure={true}
-          />
-
-          <Text style={[styles.text, styles.link, {textAlign: 'right'}]}>
-            Forgot Password?
-          </Text>
-          <TouchableOpacity>
-            <LinearGradient
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
-              colors={['#F47621', '#F89919']}
-              style={styles.button}>
-              <Text style={styles.textOrder}>LOGIN</Text>
-            </LinearGradient>
-          </TouchableOpacity>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <Text
-              style={[
-                styles.text,
-                styles.link,
-                {
-                  fontSize: hp('2%'),
-                  color: '#ABB4BD',
-                  textAlign: 'center',
-                },
-              ]}>
-              Don't have an account yet?
-            </Text>
-            <TouchableOpacity
-              onPress={() => {
-                this.props.navigation.navigate('Signup');
-              }}>
-              <Text style={[styles.text, styles.link]}> Register Now</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View>
-          <Text
-            style={[
-              styles.text,
-              {
-                color: '#ABB4BD',
-                fontSize: hp('2.5%'),
-                textAlign: 'center',
-                marginVertical: hp('2%'),
-              },
-            ]}>
-            or
-          </Text>
-          <SocialIcon title="Sign In With Facebook" button type="facebook" />
-          <SocialIcon title="Sign In With Google" button type="google" />
-        </View>
+        <Text>Hello {this.state.displayName}</Text>
+        <TouchableOpacity style={styles.button} onPress={this.signOutUser}>
+          <Text>Logout</Text>
+        </TouchableOpacity>
       </SafeAreaView>
     );
   }
@@ -108,6 +52,7 @@ var styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingHorizontal: wp('5%'),
     justifyContent: 'center',
+    alignItems: 'center',
   },
   text: {
     fontFamily: 'Avenier Next',

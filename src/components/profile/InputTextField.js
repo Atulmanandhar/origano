@@ -10,6 +10,8 @@ class InputTextField extends Component {
         <TextInput
           placeholder={this.props.placeholderText}
           secureTextEntry={this.props.isSecure}
+          onChangeText={() => this.props.onChange()}
+          value={this.props.value}
           style={styles.input}></TextInput>
         <View
           style={{borderBottomWidth: 1, borderBottomColor: '#D8D8D8'}}></View>

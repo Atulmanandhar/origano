@@ -14,7 +14,6 @@ import DetailScreen from './src/screens/DetailScreen';
 import SearchScreen from './src/screens/SearchScreen';
 import PizzaScreen from './src/screens/PizzaScreen';
 import MyOrdersScreen from './src/screens/MyOrdersScreen';
-import ProfileScreen from './src/screens/Profile/ProfileScreen';
 import SpecialScreen from './src/screens/SpecialScreen';
 import BurgerScreen from './src/screens/BurgerScreen';
 import PastaScreen from './src/screens/PastaScreen';
@@ -22,6 +21,26 @@ import SaladScreen from './src/screens/SaladScreen';
 import DessertScreen from './src/screens/DessertScreen';
 import BeverageScreen from './src/screens/BeverageScreen';
 import SignupScreen from './src/screens/Profile/SignupScreen';
+import LoginScreen from './src/screens/Profile/LoginScreen';
+import ProfileScreen from './src/screens/Profile/ProfileScreen';
+
+import * as firebase from 'firebase';
+import LoadingScreen from './src/screens/Profile/LoadingScreen';
+
+// Your web app's Firebase configuration
+var firebaseConfig = {
+  apiKey: 'AIzaSyA0jkedVJuLNH5d5zMRb8DUhEQsdiEkH3o',
+  authDomain: 'origano-4e3b7.firebaseapp.com',
+  databaseURL: 'https://origano-4e3b7.firebaseio.com',
+  projectId: 'origano-4e3b7',
+  storageBucket: 'origano-4e3b7.appspot.com',
+  messagingSenderId: '545657299659',
+  appId: '1:545657299659:web:1ec834d970daec9d71f14e',
+  measurementId: 'G-C0C1BB3C2H',
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+// firebase.analytics();
 
 const Stack = createStackNavigator();
 const ProfileStack = createStackNavigator();
@@ -77,14 +96,16 @@ const HomeTabNavigator = () => {
 const ProfileNavigator = () => {
   return (
     <ProfileStack.Navigator
-      initialRouteName="Profile"
+      initialRouteName="Loading"
       screenOptions={{
         headerShown: false,
         gestureEnabled: true,
         gestureDirection: 'horizontal',
         ...TransitionPresets.SlideFromRightIOS,
       }}>
+      <ProfileStack.Screen name="Loading" component={LoadingScreen} />
       <ProfileStack.Screen name="Profile" component={ProfileScreen} />
+      <ProfileStack.Screen name="Login" component={LoginScreen} />
       <ProfileStack.Screen name="Signup" component={SignupScreen} />
     </ProfileStack.Navigator>
   );
