@@ -17,6 +17,7 @@ import {
 import ProfileDetail from './ProfileDetails';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import LinearGradient from 'react-native-linear-gradient';
+import CardView from 'react-native-cardview';
 
 export class ProfileScreen extends Component {
   constructor(props) {
@@ -65,7 +66,7 @@ export class ProfileScreen extends Component {
                 fontSize: hp('3.5%'),
                 fontWeight: 'bold',
                 marginTop: hp('2%'),
-                marginBottom: hp('5%'),
+                marginBottom: hp('8%'),
                 color: '#fbfbfb',
               }}>
               {/* {this.state.displayName} */}
@@ -89,13 +90,16 @@ export class ProfileScreen extends Component {
               <Text style={styles.details}>{this.state.displayName}</Text>
             </View>
           </View> */}
-          <View
+          <CardView
+            cardElevation={2}
+            cardMaxElevation={2}
+            cornerRadius={20}
             style={{
-              borderWidth: 1,
-              borderRadius: 50,
-              paddingVertical: hp('2%'),
               paddingHorizontal: wp('5%'),
-              borderColor: '#fbfbfb',
+              paddingVertical: hp('2%'),
+              marginHorizontal: wp('3%'),
+              position: 'absolute',
+              marginVertical: hp('30%'),
             }}>
             <ProfileDetail
               name={'+9779862244150'}
@@ -113,26 +117,25 @@ export class ProfileScreen extends Component {
               name={'Male'}
               source={require('../../asset/gender.png')}
             />
-          </View>
-          <TouchableOpacity style={{marginVertical: hp('10%')}}>
-            <LinearGradient
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
-              colors={['#F47621', '#F89919']}
-              width={wp('35%')}
-              height={hp('6%')}
-              style={styles.buttonDelivery}>
-              <Text style={styles.textOrder}>Edit Profile </Text>
-            </LinearGradient>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={{marginVertical: hp('5%'), alignSelf: 'center'}}>
+              <LinearGradient
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 0}}
+                colors={['#F47621', '#F89919']}
+                width={wp('35%')}
+                height={hp('6%')}
+                style={styles.buttonDelivery}>
+                <Text style={styles.textOrder}>Edit Profile </Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </CardView>
         </SafeAreaView>
       );
     }
   }
 }
 export default ProfileScreen;
-
-const width = Dimensions.get('screen').width;
 var styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -166,6 +169,8 @@ var styles = StyleSheet.create({
   profileUI: {
     width: wp('100%'),
     paddingTop: hp('7%'),
+    borderBottomRightRadius: 50,
+    borderBottomLeftRadius: 50,
     backgroundColor: '#EC942A',
     justifyContent: 'center',
     alignItems: 'center',

@@ -23,6 +23,7 @@ import BeverageScreen from './src/screens/BeverageScreen';
 import SignupScreen from './src/screens/Profile/SignupScreen';
 import LoginScreen from './src/screens/Profile/LoginScreen';
 import ProfileScreen from './src/screens/Profile/ProfileScreen';
+import Notification from './src/screens/NotificationScreen';
 
 import * as firebase from 'firebase';
 import LoadingScreen from './src/screens/Profile/LoadingScreen';
@@ -55,11 +56,11 @@ const HomeTabNavigator = () => {
       // inactiveColor="#424242"
       barStyle={{backgroundColor: 'white'}}>
       <Tab.Screen
-        name="Home"
-        component={HomeScreen}
+        name="Notifications"
+        component={Notification}
         options={{
           tabBarIcon: ({color}) => (
-            <Ionicons name="ios-home" color={color} size={26} />
+            <Ionicons name="ios-notifications" color={color} size={26} />
           ),
         }}
       />
@@ -72,6 +73,16 @@ const HomeTabNavigator = () => {
           ),
         }}
       />
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarIcon: ({color}) => (
+            <Ionicons name="ios-home" color="#EC942A" size={26} />
+          ),
+        }}
+      />
+
       <Tab.Screen
         name="Orders"
         component={MyOrdersScreen}
