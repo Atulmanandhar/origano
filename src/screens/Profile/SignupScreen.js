@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   ScrollView,
   SafeAreaView,
+  KeyboardAvoidingView,
+  ActivityIndicator,
   TextInput,
 } from 'react-native';
 import * as firebase from 'firebase';
@@ -18,7 +20,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-
+import LoadingScreen from './LoadingScreen';
 export class SignupScreen extends Component {
   constructor(props) {
     super(props);
@@ -27,9 +29,12 @@ export class SignupScreen extends Component {
       email: '',
       password: '',
       errorMessage: null,
+      isLoading: false,
     };
   }
+
   handleSignUp = () => {
+    this.setState({isLoading: true});
     firebase
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
@@ -42,29 +47,46 @@ export class SignupScreen extends Component {
             firebase
               .auth()
               .signOut()
-              .then(() => this.props.navigation.navigate('Loading'));
+              .then(() => {
+                this.props.navigation.navigate('Login');
+                this.setState({isLoading: false});
+              });
           });
+        this.setState({isLoading: false});
       })
 
       .catch((error) => {
         this.setState({errorMessage: error.message});
+        this.setState({isLoading: false});
       });
   };
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <View>
-          {/* <View
+        <KeyboardAvoidingView
+          behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+          // contentContainerStyle={{flexGrow: 1}}
+          style={{flex: 1}}>
+          <View
             style={{
               alignItems: 'center',
               justifyContent: 'center',
               marginBottom: hp('2%'),
             }}>
-            <Image
+            {/* <Image
               source={require('../asset/origanologo.jpg')}
               style={{height: hp('20%'), width: wp('70%')}}
-            />
-          </View> */}
+            /> */}
+            <Text
+              style={{
+                marginTop: hp('10%'),
+                fontSize: hp('5%'),
+                fontWeight: 'bold',
+                color: '#EC942A',
+              }}>
+              Register
+            </Text>
+          </View>
           <View
             style={{
               height: hp('2%'),
@@ -79,21 +101,37 @@ export class SignupScreen extends Component {
               </Text>
             )}
           </View>
-          {/* <InputTextField
+          <InputTextField
             title={'Full Name'}
+            onChange={(fname) => {
+              this.setState({fname});
+            }}
+            autoCapitalize="words"
+            value={this.state.fname}
+            autoCompleteType="off"
           />
-          <InputTextField title={'Email'} />
+          <InputTextField
+            title={'Email'}
+            style={{marginTop: hp('2%')}}
+            onChange={(email) => {
+              this.setState({email});
+            }}
+            autoCapitalize="none"
+            autoCompleteType="off"
+            type="email-address"
+            value={this.state.email}
+          />
           <InputTextField
             style={{marginTop: hp('2%')}}
             title={'Password'}
             isSecure={true}
+            autoCapitalize="none"
+            onChange={(password) => {
+              this.setState({password});
+            }}
+            value={this.state.password}
           />
-          <InputTextField
-            style={{marginTop: hp('2%')}}
-            title={'Confirm Password'}
-            isSecure={true}
-          /> */}
-          <TextInput
+          {/* <TextInput
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             placeholder="Full Name"
             onChangeText={(fname) => this.setState({fname})}
@@ -110,16 +148,23 @@ export class SignupScreen extends Component {
             placeholder="Password"
             onChangeText={(password) => this.setState({password})}
             value={this.state.password}
-          />
+          /> */}
           <TouchableOpacity onPress={this.handleSignUp}>
             <LinearGradient
               start={{x: 0, y: 0}}
               end={{x: 1, y: 0}}
               colors={['#F47621', '#F89919']}
               style={styles.button}>
-              <Text style={styles.textOrder}>SIGN UP</Text>
+              <Text style={styles.textOrder}>SIGN UP </Text>
+              <ActivityIndicator
+                animating={this.state.isLoading}
+                size="small"
+                color="white"
+                style={{position: 'absolute', paddingLeft: wp('25%')}}
+              />
             </LinearGradient>
           </TouchableOpacity>
+
           <View
             style={{
               alignItems: 'center',
@@ -143,7 +188,7 @@ export class SignupScreen extends Component {
               <Text style={[styles.text, styles.link]}> Sign In</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     );
   }
@@ -176,6 +221,7 @@ var styles = StyleSheet.create({
   button: {
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
     paddingVertical: hp('1.5%'),
     marginVertical: hp('2%'),
     borderRadius: 100,

@@ -6,6 +6,8 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
+  ActivityIndicator,
+  KeyboardAvoidingView,
   TextInput,
   SafeAreaView,
 } from 'react-native';
@@ -25,41 +27,63 @@ export class LoginScreen extends Component {
       email: '',
       password: '',
       errorMessage: null,
+      isLoading: false,
     };
   }
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      this.props.navigation.navigate(user ? 'Profile' : 'Login');
+    });
+  }
   handleLogin = () => {
+    this.setState({isLoading: true});
     const {email, password} = this.state;
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        this.setState({
+          email: '',
+          password: '',
+          errorMessage: null,
+          isLoading: false,
+        });
+      })
       .catch((error) => {
         this.setState({
           errorMessage: error.message,
         });
+        this.setState({isLoading: false});
       });
   };
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <View>
-          {/* <View
+        <KeyboardAvoidingView
+          behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+          // contentContainerStyle={{flexGrow: 1}}
+          style={{flex: 1}}>
+          <View
             style={{
               alignItems: 'center',
               justifyContent: 'center',
               marginBottom: hp('2%'),
             }}>
-            <Image
-              source={require('../asset/origanologo.jpg')}
+            {/* <Image
+              source={require('../../asset/origanologo.jpg')}
               style={{height: hp('20%'), width: wp('70%')}}
-            />
-          </View> */}
+            /> */}
+            <Text
+              style={{
+                marginTop: hp('10%'),
+                fontSize: hp('5%'),
+                fontWeight: 'bold',
+                color: '#EC942A',
+              }}>
+              Login
+            </Text>
+          </View>
 
-          {/* <InputTextField title={'Email'} />
-          <InputTextField
-            style={{marginTop: hp('2%')}}
-            title={'Password'}
-            isSecure={true}
-          /> */}
           <View
             style={{
               height: hp('2%'),
@@ -69,12 +93,38 @@ export class LoginScreen extends Component {
             }}>
             {this.state.errorMessage && (
               <Text
-                style={{color: 'red', fontSize: hp('2%'), textAlign: 'center'}}>
+                style={{
+                  color: 'red',
+                  fontSize: hp('2%'),
+                  textAlign: 'center',
+                }}>
                 {this.state.errorMessage}
               </Text>
             )}
           </View>
-          <TextInput
+
+          <InputTextField
+            title={'Email'}
+            onChange={(email) => {
+              this.setState({email});
+            }}
+            value={this.state.email}
+            type="email-address"
+            autoCapitalize="none"
+            autoCompleteType="off"
+          />
+          <InputTextField
+            style={{marginTop: hp('2%')}}
+            title={'Password'}
+            isSecure={true}
+            onChange={(password) => {
+              this.setState({password});
+            }}
+            autoCapitalize="none"
+            value={this.state.password}
+          />
+
+          {/* <TextInput
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             placeholder="Email"
             onChangeText={(email) => this.setState({email})}
@@ -85,7 +135,7 @@ export class LoginScreen extends Component {
             placeholder="Password"
             onChangeText={(password) => this.setState({password})}
             value={this.state.password}
-          />
+          /> */}
 
           <Text style={[styles.text, styles.link, {textAlign: 'right'}]}>
             Forgot Password?
@@ -97,6 +147,12 @@ export class LoginScreen extends Component {
               colors={['#F47621', '#F89919']}
               style={styles.button}>
               <Text style={styles.textOrder}>LOGIN</Text>
+              <ActivityIndicator
+                animating={this.state.isLoading}
+                size="small"
+                color="white"
+                style={{position: 'absolute', paddingLeft: wp('25%')}}
+              />
             </LinearGradient>
           </TouchableOpacity>
           <View
@@ -124,23 +180,24 @@ export class LoginScreen extends Component {
               <Text style={[styles.text, styles.link]}> Register Now</Text>
             </TouchableOpacity>
           </View>
-        </View>
-        <View>
-          <Text
-            style={[
-              styles.text,
-              {
-                color: '#ABB4BD',
-                fontSize: hp('2.5%'),
-                textAlign: 'center',
-                marginVertical: hp('2%'),
-              },
-            ]}>
-            or
-          </Text>
-          <SocialIcon title="Sign In With Facebook" button type="facebook" />
-          <SocialIcon title="Sign In With Google" button type="google" />
-        </View>
+
+          <View>
+            <Text
+              style={[
+                styles.text,
+                {
+                  color: '#ABB4BD',
+                  fontSize: hp('2.5%'),
+                  textAlign: 'center',
+                  marginVertical: hp('2%'),
+                },
+              ]}>
+              or
+            </Text>
+            <SocialIcon title="Sign In With Facebook" button type="facebook" />
+            <SocialIcon title="Sign In With Google" button type="google" />
+          </View>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     );
   }

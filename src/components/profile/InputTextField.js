@@ -10,7 +10,10 @@ class InputTextField extends Component {
         <TextInput
           placeholder={this.props.placeholderText}
           secureTextEntry={this.props.isSecure}
-          onChangeText={() => this.props.onChange()}
+          onChangeText={this.props.onChange}
+          autoCapitalize={this.props.autoCapitalize}
+          keyboardType={this.props.type}
+          autoCompleteType={this.props.autoCompleteType}
           value={this.props.value}
           style={styles.input}></TextInput>
         <View

@@ -13,7 +13,7 @@ const Checkout = () => {
           Already have an account?
         </Text>
         <TouchableOpacity>
-          <Text style={styles.btnText}> Login</Text>
+          <Text style={styles.btnText}> Login </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.section}>

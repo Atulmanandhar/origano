@@ -47,6 +47,7 @@ const ProfileStack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 const HomeTabNavigator = () => {
+  console.disableYellowBox = true;
   return (
     <Tab.Navigator
       initialRouteName="Home"
